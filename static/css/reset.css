@@ -1,0 +1,295 @@
+/*
+* @description: 公用reset样式
+* @author: wp
+* @update: 2018-04-04
+-------------------------------*/
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+input,
+button,
+select,
+textarea,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html {
+    /* 禁止用户复制 选中文字 */
+    /* user-select: none; */
+    font-size: 62.5%;
+}
+
+body {
+    font-size: 1.4rem;
+    line-height: 1.4rem;
+    -webkit-overflow-scrolling: touch;
+    font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, SimSun, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow: hidden;
+}
+
+i.iconfont {
+    font-size: 1.4rem;
+    line-height: 1.4rem;
+}
+
+
+img {
+    border: 0 none;
+    vertical-align: middle;
+    max-width: 100%;
+}
+
+canvas {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-drag: none;
+}
+.no-copy{
+    user-select:none;
+}
+textarea {
+    padding: 5px 12px;
+    overflow-y: auto;
+    resize: vertical;
+    outline: none;
+    font-weight: 500;
+    min-height: 100px;
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid #cccccc;
+}
+
+@media (min-width: 1200px) and (max-width: 1440px) {
+    textarea {
+        min-height: 80px;
+    }
+}
+
+input,
+button,
+select,
+textarea {
+    resize: none;
+}
+
+.touch input,
+.touch button,
+.touch textarea,
+.touch select {
+    -webkit-appearance: none;
+}
+
+textarea,
+textarea::-webkit-input-placeholder {
+    font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, SimSun, sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul,
+ol {
+    list-style: none outside none;
+}
+
+input {
+    background: none;
+}
+
+.amap-info {
+    z-index: 0;
+}
+
+.el-notification {
+    z-index: 777 !important;
+}
+
+.no-border.el-input input.el-input__inner {
+    border: 0px;
+}
+
+.amap-scalecontrol {
+    left: auto !important;
+    bottom: 125px !important;
+    right: 16px;
+}
+
+.amap-toolbar {
+    left: auto !important;
+    top: 100px !important;
+    right: 35px !important;
+}
+
+.amap-ranging-label {
+    color: #000 !important;
+}
+
+.vps-alarm.el-notification {
+    border-radius: 0;
+    background-color: transparent;
+    padding: 10px 10px 16px 20px;
+    border-width: 0;
+}
+.vps-alarm.el-notification .el-notification__group{
+    margin: 0;
+}
+.vps-alarm.el-notification *{
+    color:#fff !important;
+    line-height: 18px!important;
+}
+.vps-alarm.el-notification .el-notification__content{
+    line-height: 14px!important;
+    margin: 0;
+}
+
+.vps-alarm.el-notification.police {
+    background: linear-gradient(90deg, rgba(255, 25, 25, 1), rgba(255, 25, 25, .6));
+}
+
+.vps-alarm.el-notification.abnormal {
+    background: linear-gradient(90deg, rgba(251, 168, 52, 1), rgba(251, 168, 52, .6));
+}
+.vps-alarm.el-notification .el-notification__content .top-wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/*.vps-alarm.el-notification .el-notification__content .top-wrapper .tag-wrapper{*/
+/*}*/
+.vps-alarm.el-notification .el-notification__content .top-wrapper .level{
+    padding: 3px 6px;
+    line-height: 12px!important;
+    background-color: #fff;
+    border-radius: 4px;
+}
+
+.vps-alarm.el-notification .el-notification__content .top-wrapper>* {
+    margin-right: 10px;
+}
+
+
+.vps-alarm.el-notification.police .el-notification__content .top-wrapper .level{
+    color: rgba(255,25,25,1)!important;
+}
+.vps-alarm.el-notification.abnormal .el-notification__content .top-wrapper .level{
+    color: rgba(251,168,52,1)!important;
+}
+.vps-alarm.el-notification .el-notification__content .top-wrapper .tag-wrapper.hiddle{
+    display: none;
+}
+
+.vps-alarm.el-notification .el-notification__content .bottom-wrapper .alarminfo-wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.vps-alarm.el-notification .el-notification__content .bottom-wrapper .alarminfo-wrapper i{
+    margin-right: 10px;
+}
+.vps-wrapper .P p{
+
+}
+.vps-wrapper .labelP p{
+    /*height: 18px;*/
+    line-height: 18px;
+    font-size: 12px;
+}
+.vps-wrapper .titleP p{
+    /*height: 36px;*/
+    line-height: 32px;
+    font-size: 14px;
+}
