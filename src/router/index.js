@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import login from '@/pages/login/index.vue'
 import personChangeManage from '@/pages/vehicleLoan/personChangeManage'
-import personChangeManage2 from '@/pages/vehicleLoan/personChangeManage2'
 import homePage from '@/pages/homePage/index.vue'
 import layout from '@/layout/Layout.vue'
 
@@ -42,15 +41,8 @@ export const constantRouterMap = [
                 component: personChangeManage,
                 meta:{title:'人员异动管理'},
             },
-            {
-                path: 'personChangeManage2',
-                name: 'personChangeManage2',
-                component: personChangeManage2,
-                meta:{title:'人员异动管理'},
-            },
         ]
     },
-    //personChangeManage2
   ]
 export const router = new Router({
     routes: constantRouterMap,

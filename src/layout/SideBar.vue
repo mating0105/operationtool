@@ -42,12 +42,6 @@ export default{
                             hidden:false,
                             icon:'iconyidongguanli'
                         },
-                        {
-                            path:'personChangeManage2',
-                            name:'人员异动管理2',
-                            hidden:true,
-                            icon:'iconyidongguanli'
-                        },
 
                     ]
                 },
