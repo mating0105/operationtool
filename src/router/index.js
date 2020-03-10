@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import login from '@/pages/login/index.vue'
 import personChangeManage from '@/pages/vehicleLoan/personChangeManage'
+const T0CarAdd = () => import('@/pages/vehicleLoan/t0CarAdd');
 import homePage from '@/pages/homePage/index.vue'
 import layout from '@/layout/Layout.vue'
 
@@ -40,6 +41,12 @@ export const constantRouterMap = [
                 name: 'personChangeManage',
                 component: personChangeManage,
                 meta:{title:'人员异动管理'},
+            },
+            {
+                path: 't0CarAdd',
+                name: 't0CarAdd',
+                component: T0CarAdd,
+                meta:{title:'T+0车辆添加'},
             },
         ]
     },

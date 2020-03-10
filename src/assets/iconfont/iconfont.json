@@ -6,25 +6,18 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "13362982",
+      "name": "car",
+      "font_class": "tcar",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
       "icon_id": "1012763",
       "name": "喵喵速贷",
       "font_class": "chedai",
       "unicode": "e619",
       "unicode_decimal": 58905
-    },
-    {
-      "icon_id": "1168071",
-      "name": "首页",
-      "font_class": "homepage",
-      "unicode": "e603",
-      "unicode_decimal": 58883
-    },
-    {
-      "icon_id": "6729613",
-      "name": "学员异动",
-      "font_class": "yidongguanli",
-      "unicode": "e60c",
-      "unicode_decimal": 58892
     },
     {
       "icon_id": "8574208",
@@ -34,11 +27,25 @@
       "unicode_decimal": 59113
     },
     {
+      "icon_id": "6729613",
+      "name": "学员异动",
+      "font_class": "yidongguanli",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
       "icon_id": "12683881",
       "name": "收起",
       "font_class": "shouqi",
       "unicode": "e621",
       "unicode_decimal": 58913
+    },
+    {
+      "icon_id": "1168071",
+      "name": "首页",
+      "font_class": "homepage",
+      "unicode": "e603",
+      "unicode_decimal": 58883
     }
   ]
 }

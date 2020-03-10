@@ -42,7 +42,12 @@ export default{
                             hidden:false,
                             icon:'iconyidongguanli'
                         },
-
+                        {
+                            path:'t0CarAdd',
+                            name:'T+0车型添加',
+                            hidden:false,
+                            icon:'icontcar'
+                        },
                     ]
                 },
             ]
