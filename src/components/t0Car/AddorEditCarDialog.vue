@@ -3,7 +3,7 @@
  * @Author: shenah
  * @Date: 2020-03-10 11:35:42
  * @LastEditors: shenah
- * @LastEditTime: 2020-03-10 13:51:31
+ * @LastEditTime: 2020-03-11 09:51:11
  -->
 <template>
   <Modal
@@ -11,7 +11,7 @@
     @onClosed="doClose"
     width="540px"
   >
-    <div slot="head">{{row?'编辑':'新增'}}T+0车辆</div>
+    <div slot="head">{{row?'修改':'新增'}}T+0车辆</div>
     <el-form
       :model="form"
       :rules="rules"
@@ -30,7 +30,7 @@
         ></el-input>
       </el-form-item>
       <el-form-item
-        label="车系名称"
+        label="车系名称: "
         prop="carSeries"
       >
         <el-input
@@ -40,19 +40,19 @@
         ></el-input>
       </el-form-item>
       <el-form-item
-        label="年份"
-        prop="carYear"
+        label="年份: "
+        prop="chYear"
       >
         <el-date-picker
           class="wid100"
           placeholder="请选择年份"
           type="year"
-          v-model="form.carYear"
+          v-model="form.chYear"
           value-format="yyyy"
         ></el-date-picker>
       </el-form-item>
       <el-form-item
-        label="车价"
+        label="车价: "
         prop="chPrice"
       >
         <el-input
@@ -62,12 +62,6 @@
         >
           <template slot="append">万元</template>
         </el-input>
-      </el-form-item>
-      <el-form-item
-        label="权限"
-        prop="chPrice"
-      >
-        <el-switch v-model="form.isEnable"></el-switch>
       </el-form-item>
     </el-form>
     <div slot="foot">
@@ -87,6 +81,7 @@
 </template>
 
 <script>
+import Api from "@api";
 import Modal from "@/components/common/Modal.vue";
 export default {
   name: "AddorEditCarDialog",
@@ -100,16 +95,16 @@ export default {
         carSeries: [
           { required: true, message: "请输入车系名称", trigger: "blur" }
         ],
-        carYear: [{ required: true, message: "请选择年份", trigger: "change" }],
+        chYear: [{ required: true, message: "请选择年份", trigger: "change" }],
         chPrice: [{ required: true, message: "请输入车价", trigger: "blur" }]
       },
       form: {
         bendNm: "", // 品牌名称
         carSeries: "", // 车系名称
-        carYear: "", // 选择的年份
-        chPrice: "", // 车价
-        isEnable: true // 默认开始,开启禁用
-      }
+        chYear: "", // 选择的年份
+        chPrice: "" // 车价
+      },
+      type: "add" // 新增
     };
   },
   props: {
@@ -124,13 +119,18 @@ export default {
   mounted() {
     if (this.row) {
       this.form = { ...this.form, ...this.row };
+      this.type = "edit"; // 编辑
     }
   },
   methods: {
     submit() {
       this.$refs.form.validate(valid => {
         if (valid) {
-          console.log(111, this.form);
+          Api.addOrEdiTcar(this.form).then(res => {
+            this.$emit("modalChange", {
+              type: this.type
+            });
+          });
         } else {
           return false;
         }

@@ -3,67 +3,72 @@
  * @Author: shenah
  * @Date: 2020-03-10 11:23:11
  * @LastEditors: shenah
- * @LastEditTime: 2020-03-10 11:31:35
+ * @LastEditTime: 2020-03-11 09:32:30
  -->
 
 <template>
   <el-pagination
-    :small="small"
     :background="background"
-    :page-size="pageSize"
-    :total="total"
-    :page-count="pageCount"
     :current-page="currentPage"
+    :page-count="pageCount"
+    :page-size="pageSize"
     :page-sizes="pageSizes"
-    layout="total, sizes, prev, pager, next"
-    @size-change="sizeChange"
+    :small="small"
+    :total="total"
     @current-change="currentChange"
-    @prev-click="prevClick"
     @next-click="nextClick"
+    @prev-click="prevClick"
+    @size-change="sizeChange"
+    layout="total, sizes, prev, pager, next"
   ></el-pagination>
 </template>
 
 <script>
 export default {
-  name: 'Paging',
+  name: "Paging",
   components: {},
   data() {
-    return {
-      currentPage: 1, // 当前选中的页码
-    };
+    return {};
   },
   props: {
     small: {
       type: Boolean,
-      default: false,
+      default: false
     },
     background: {
       type: Boolean,
-      default: false,
+      default: false
     },
     pageSize: {
       type: Number,
-      default: 10,
+      default: 10
     },
     total: {
       type: Number,
-      default: 0,
+      default: 0
     },
     pageCount: {
       type: Number,
-      default: 100,
+      default: 100
     },
     pageSizes: {
       type: Array,
-      default: () => [15, 30, 45, 60],
+      default: () => [15, 30, 45, 60]
     },
+    value: {
+      type: Number,
+      default: 1
+    }
   },
-  mounted() {},
+  computed: {
+    currentPage() {
+      return this.value;
+    }
+  },
   methods: {
     sizeChange(val) {
       // 每页显示多少条数据
-      this.currentPage = 1;
-      this.$emit('pageChange', { pageSize: val, pageIndex: 1 });
+      this.$emit("pageChange", { pageSize: val, pageIndex: 1 });
     },
     currentChange(val) {
       // 当前点击的页面数
@@ -79,10 +84,9 @@ export default {
     },
     currentPageChange(val) {
       // 当前页改变的公用方法
-      this.currentPage = val;
-      this.$emit('pageChange', { pageIndex: val });
-    },
-  },
+      this.$emit("pageChange", { pageIndex: val });
+    }
+  }
 };
 </script>
 <style lang='less' scoped>

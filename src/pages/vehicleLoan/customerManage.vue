@@ -1,13 +1,14 @@
 <!--
- * @Description: T+0车辆车型添加
+ * @Description: 客户信息管理
  * @Author: shenah
- * @Date: 2020-03-10 10:19:04
+ * @Date: 2020-03-11 09:35:28
  * @LastEditors: shenah
- * @LastEditTime: 2020-03-12 11:39:11
+ * @LastEditTime: 2020-03-12 11:39:37
  -->
 
+
 <template>
-  <div class="t0CarAdd">
+  <div class="customer-manage">
     <el-col
       :span="24"
       class="tool-box"
@@ -21,7 +22,7 @@
           <el-input
             class="large-input"
             clearable
-            placeholder="请输入车辆\车型\车系等关键字"
+            placeholder="请输入姓名\身份证"
             v-model.trim="requestParams.keyWords"
           ></el-input>
         </el-form-item>
@@ -36,13 +37,6 @@
     </el-col>
 
     <div class="tabel-box">
-      <div class="oper-btns">
-        <el-button
-          @click="operation(null,'addCar')"
-          size="small"
-          type="primary"
-        >新增车辆</el-button>
-      </div>
       <el-table
         :data="listObj.list"
         :max-height="800"
@@ -58,39 +52,52 @@
         ></el-table-column>
         <el-table-column
           align="center"
-          label="品牌名称"
-          prop="bendNm"
+          label="客户姓名"
+          prop="customerName"
+          width="100"
         ></el-table-column>
         <el-table-column
           align="center"
-          label="车系名称"
-          prop="carSeries"
+          label="身份证号码"
+          prop="certificateNum"
+          width="180"
+        ></el-table-column>
+        <el-table-column
+          :formatter="(row)=> `${row.nation}族`"
+          align="center"
+          label="民族"
+          prop="nation"
+          width="100"
         ></el-table-column>
         <el-table-column
           align="center"
-          label="年份"
-          prop="chYear"
+          label="身份证住址"
+          min-width="200"
+          prop="familyAddress"
         ></el-table-column>
         <el-table-column
           align="center"
-          label="车价"
-          prop="chPrice"
+          label="身份证签发机关"
+          min-width="200"
+          prop="signOrg"
         ></el-table-column>
         <el-table-column
           align="center"
-          label="状态"
-        >
-          <template slot-scope="scope">
-            <div
-              :class="{'operate-able':scope.row.enable,'operate-disable':!scope.row.enable}"
-            >{{scope.row.enable?'开启':'禁用'}}</div>
-          </template>
-        </el-table-column>
+          label="身份证起始日"
+          prop="startDate"
+          width="120"
+        ></el-table-column>
+        <el-table-column
+          align="center"
+          label="身份证截止日"
+          prop="endDate"
+          width="120"
+        ></el-table-column>
         <el-table-column
           align="center"
           fixed="right"
           label="操作"
-          width="300"
+          width="200"
         >
           <template slot-scope="scope">
             <div class="single-operate">
@@ -105,24 +112,6 @@
                 ></i>
                 编辑
               </el-button>
-              <el-button
-                @click.native.prevent="operation(scope.row,'del')"
-                class="operate-disable"
-                size="small"
-                type="text"
-              >
-                <i
-                  class="el-icon-close"
-                  title="删除"
-                ></i>
-                删除
-              </el-button>
-              <el-button
-                :class="{'operate-able':!scope.row.enable,'operate-disable':scope.row.enable}"
-                @click.native.prevent="operation(scope.row,'ableOrDis')"
-                size="small"
-                type="text"
-              >{{scope.row.enable ?'禁用':'启用'}}</el-button>
             </div>
           </template>
         </el-table-column>
@@ -133,14 +122,14 @@
         class="table-page"
         v-model="requestParams.pageIndex"
       />
-      <!-- 新增弹出框 -->
-      <AddorEditCarDialog
+      <!-- 修改客户信息 -->
+      <AddOrEditCustomerDialog
         :row="row"
         @modalChange="modalChange"
-        ref="AddorEditCarDialog"
-        v-if="addorEditCarModalVisible"
-        v-model="addorEditCarModalVisible"
-      ></AddorEditCarDialog>
+        ref="addOrEditCustomerDialog"
+        v-if="addOrEditCustomerDialog"
+        v-model="addOrEditCustomerDialog"
+      ></AddOrEditCustomerDialog>
     </div>
   </div>
 </template>
@@ -148,15 +137,15 @@
 <script>
 import Api from "@api";
 import MessageMixins from "@/mixins/common/message";
-import AddorEditCarDialog from "@/components/t0Car/AddorEditCarDialog.vue";
+import AddOrEditCustomerDialog from "@/components/customer/AddOrEditCustomerDialog.vue";
 import Paging from "@/components/common/Paging.vue";
 export default {
-  name: "t0CarAdd",
-  components: { Paging, AddorEditCarDialog },
+  name: "customerManage",
+  components: { Paging, AddOrEditCustomerDialog },
   mixins: [MessageMixins],
   data() {
     return {
-      addorEditCarModalVisible: false,
+      addOrEditCustomerDialog: false,
       requestParams: {
         // 请求参数
         keyWords: "",
@@ -187,46 +176,19 @@ export default {
       this.queryList();
     },
     modalChange({ type }) {
-      if (type === "add") {
-        this.requestParams.pageIndex = 1;
-        this.requestParams.keyWords = "";
-      }
       this.queryList();
-      this.addorEditCarModalVisible = false;
+      this.addOrEditCustomerDialog = false;
     },
     operation(row, type) {
       this.row = row;
-      if (type === "addCar") {
-        // 新增车辆
-        this.addorEditCarModalVisible = true;
-        this.row = null;
-      } else if (type === "edit") {
+      if (type === "edit") {
         // 编辑
-        this.addorEditCarModalVisible = true;
-      } else if (type === "del") {
-        this.confirmWarning({
-          content: `是否删除${row.bendNm}?`
-        }).then(() => {
-          Api.deleteTcar({
-            id: row.id
-          }).then(res => {
-            this.showSuccessMsg(res.msg);
-            this.queryList();
-          });
-        });
-      } else if (type === "ableOrDis") {
-        Api.enableTCar({
-          id: row.id,
-          enable: !row.enable
-        }).then(res => {
-          this.showSuccessMsg(res.msg);
-          this.queryList();
-        });
+        this.addOrEditCustomerDialog = true;
       }
     },
     queryList() {
       this.loading = true;
-      Api.queryTList(this.requestParams)
+      Api.queryCustomerList(this.requestParams)
         .then(res => {
           this.listObj = res.data;
         })
@@ -238,7 +200,7 @@ export default {
 };
 </script>
 <style lang='less' scoped>
-.t0CarAdd {
+.customer-manage {
   .tool-box {
     display: flex;
     align-items: center;

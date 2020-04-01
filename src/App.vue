@@ -5,11 +5,23 @@
 </template>
 
 <script>
+import Api from "@api";
 export default {
-  name: "App"
+  name: "App",
+  mounted() {
+    this.queryDics();
+  },
+  methods: {
+    queryDics() {
+      Api.queryDictionaries([
+        'FAMOUS_RACE', // 民族
+      ]).then(res => {
+        this.$store.dispatch("queryDics", res.data);
+      });
+    }
+  }
 };
 </script>
-
 <style lang="less">
 @import "../static/css/common.less";
 #app {
